@@ -1,0 +1,27 @@
+{
+  "name": "sandbox-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dest",
+    "watch": "babel src -d dest -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DriftwoodJP/sandbox-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DriftwoodJP/sandbox-react/issues"
+  },
+  "homepage": "https://github.com/DriftwoodJP/sandbox-react#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
