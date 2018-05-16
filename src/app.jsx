@@ -1,17 +1,20 @@
 //コンポーネントの作成
-function MyH1() {
-  return <h1>Hello, world!</h1>;
-}
-function MyH2() {
-  return <h2>texttext</h2>;
-}
-function MyComponent() {
+function MyComponent(props: Props) {
   return (
     <div>
-      <MyH1 />
-      <MyH2 />
+      props1 : {props.myPropsName1}
+      props2 : {props.myPropsName2}
     </div>
   );
 }
+
+type Props = {
+  myPropsName1: string,
+  myPropsName2: number
+};
+
 //コンポーネントの描画
-ReactDOM.render(<MyComponent />, document.getElementById("app"));
+ReactDOM.render(
+  <MyComponent myPropsName1="string" myPropsName2={1} />,
+  document.getElementById("app")
+);
