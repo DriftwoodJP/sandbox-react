@@ -1,20 +1,22 @@
+// @flow
 //コンポーネントの作成
-function MyComponent(props: Props) {
-  return (
-    <div>
-      props1 : {props.myPropsName1}
-      props2 : {props.myPropsName2}
-    </div>
-  );
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      myState: 1
+    };
+    //1秒ごとにStateを更新する
+    setInterval(() => {
+      this.setState({
+        myState: this.state.myState + 1
+      });
+    }, 1000);
+  }
+
+  render() {
+    return <div>myState : {this.state.myState}</div>;
+  }
 }
-
-type Props = {
-  myPropsName1: string,
-  myPropsName2: number
-};
-
 //コンポーネントの描画
-ReactDOM.render(
-  <MyComponent myPropsName1="string" myPropsName2={1} />,
-  document.getElementById("app")
-);
+ReactDOM.render(<MyComponent />, document.getElementById("app"));
