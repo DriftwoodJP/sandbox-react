@@ -1,94 +1,50 @@
-//コンポーネントの作成
-class Number extends React.Component {
+//子コンポーネント
+class ChildComopnent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stateVal: 0
+      count: 0
     };
-    this.incrementState = this.incrementState.bind(this);
+    setInterval(() => {
+      this.setState({
+        count: ++this.state.count
+      });
+    }, 1000);
   }
-  //Stateの加算
-  incrementState() {
-    this.setState({
-      stateVal: this.state.stateVal + 1
-    });
-  }
-  componentWillMount() {
-    console.log("componentWillMount(): コンポーネントのマウント前");
-  }
-  componentDidMount() {
-    console.log("componentDidMount(): コンポーネントのマウント後");
-  }
-  componentWillReceiveProps() {
-    console.log("componentWillReceiveProps(): コンポーネントが受け取るpropsが変化");
-  }
-  shouldComponentUpdate() {
-    console.log("shouldComponentUpdate(): コンポーネントがアップデートされる前1");
-    return true;
-  }
-  componentWillUpdate() {
-    console.log("componentWillUpdate(): コンポーネントがアップデートされる前2");
-  }
-  componentDidUpdate() {
-    console.log("componentDidUpdate(): コンポーネントがアップデートされた後");
-  }
-  componentWillUnmount() {
-    console.log("componentWillUnmount(): コンポーネントがアンマウントされた後");
+  getCount() {
+    return this.state.count;
   }
   render() {
     return (
       <div>
-        <p>props:{this.props.propVal}</p>
-        <p>state:{this.state.stateVal}</p>
-        <input type="button" value="stateの加算" onClick={this.incrementState} />
+        <p>ChildComopnent</p>
+        <p>{this.state.count}</p>
       </div>
     );
   }
 }
-class MyComponent extends React.Component {
+//親コンポーネント
+class ParentComopnent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      propVal: 0,
-      isComponent: false
+      count: 0
     };
-    this.incrementProps = this.incrementProps.bind(this);
-    this.ｍountComponent = this.ｍountComponent.bind(this);
   }
-  //propsの加算
-  incrementProps() {
+  getCount() {
     this.setState({
-      propVal: this.state.propVal + 1
+      count: this.refs.MyChildComponent.getCount()
     });
   }
-
-  ｍountComponent() {
-    this.setState({
-      isComponent: !this.state.isComponent
-    });
-  }
-
   render() {
     return (
       <div>
-        <input
-          type="button"
-          value="Numberコンポーネントのマウント切り替え"
-          onClick={this.ｍountComponent}
-        />
-        <br />
-        {(() => {
-          if (this.state.isComponent) {
-            return <Number propVal={this.state.propVal} />;
-          } else {
-            return null;
-          }
-        })()}
-        <input type="button" value="propsの加算" onClick={this.incrementProps} />
-        <br />
+        <p onClick={this.getCount.bind(this)}>ParentComopnent</p>
+        <p>{this.state.count}</p>
+        <ChildComopnent ref="MyChildComponent" />
       </div>
     );
   }
 }
 //コンポーネントの描画
-ReactDOM.render(<MyComponent />, document.getElementById("app"));
+ReactDOM.render(<ParentComopnent />, document.getElementById("app"));
