@@ -18,25 +18,36 @@ var MyComponent = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).call(this, props));
 
     _this.state = {
-      myState: 1
+      myText: null
     };
-    //1秒ごとにStateを更新する
-    setInterval(function () {
-      _this.setState({
-        myState: _this.state.myState + 1
-      });
-    }, 1000);
+    _this.setMyText = _this.setMyText.bind(_this);
     return _this;
   }
+  //テキストの設定
+
 
   _createClass(MyComponent, [{
+    key: "setMyText",
+    value: function setMyText() {
+      this.setState({
+        myText: this.refs.myText.value
+      });
+      this.refs.myText.value = "";
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
-        "myState : ",
-        this.state.myState
+        React.createElement(
+          "p",
+          null,
+          "\u5165\u529B\u5024:",
+          this.state.myText
+        ),
+        React.createElement("input", { type: "text", ref: "myText" }),
+        React.createElement("input", { type: "button", value: "\u5165\u529B", onClick: this.setMyText })
       );
     }
   }]);

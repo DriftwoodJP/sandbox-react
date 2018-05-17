@@ -1,21 +1,27 @@
-// @flow
 //コンポーネントの作成
 class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myState: 1
+      myText: null
     };
-    //1秒ごとにStateを更新する
-    setInterval(() => {
-      this.setState({
-        myState: this.state.myState + 1
-      });
-    }, 1000);
+    this.setMyText = this.setMyText.bind(this);
   }
-
+  //テキストの設定
+  setMyText() {
+    this.setState({
+      myText: this.refs.myText.value
+    });
+    this.refs.myText.value = "";
+  }
   render() {
-    return <div>myState : {this.state.myState}</div>;
+    return (
+      <div>
+        <p>入力値:{this.state.myText}</p>
+        <input type="text" ref="myText" />
+        <input type="button" value="入力" onClick={this.setMyText} />
+      </div>
+    );
   }
 }
 //コンポーネントの描画
